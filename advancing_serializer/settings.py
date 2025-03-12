@@ -49,7 +49,35 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'advancing_serializer.custom_logger.CustomLoggerMiddleware'
 ]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_logger":False,
+    'formatters':{
+        "format_1":{
+            "format":'{levelname} | {asctime} | {message}',
+            "style":'{'
+        } 
+
+    },
+    'handlers':{
+        'console':{
+            "level":'INFO',
+            "class":'logging.StreamHandler',
+            "formatter":'format_1'
+        }
+
+    },
+    'loggers':{
+        "api-logger":{
+            "handlers":['console'],
+            "level":"INFO"
+        }
+
+    }
+}
 
 ROOT_URLCONF = 'advancing_serializer.urls'
 
